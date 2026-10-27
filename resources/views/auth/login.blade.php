@@ -10,11 +10,6 @@
                 <span class="kicker">AUTH</span>
             </div>
 
-            <div class="panel panel--yellow" style="font-family: var(--font-mono); font-size: 0.78rem;">
-                <strong>DEMO CREDENTIALS:</strong><br>
-                EMAIL: <code>demo@forgemod.test</code> // PASSWORD: <code>password</code>
-            </div>
-
             <form method="POST" action="{{ route('login.store') }}" class="form-stack">
                 @csrf
 
@@ -23,7 +18,8 @@
                     <input type="email"
                            id="email"
                            name="email"
-                           value="{{ old('email', 'demo@forgemod.test') }}"
+                           value="{{ old('email') }}"
+                           placeholder="you@domain.com"
                            required
                            autofocus
                            class="field__input">
@@ -37,7 +33,6 @@
                     <input type="password"
                            id="password"
                            name="password"
-                           value="password"
                            required
                            class="field__input">
                     @error('password')

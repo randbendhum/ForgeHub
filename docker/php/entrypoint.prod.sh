@@ -25,7 +25,7 @@ if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
     php artisan db:seed --class=Database\\Seeders\\GameSeeder --force
     php artisan db:seed --class=Database\\Seeders\\TagSeeder --force
 
-    if [ "${RUN_DEMO_SEEDER:-true}" = "true" ]; then
+    if [ "${RUN_DEMO_SEEDER:-false}" = "true" ]; then
         php artisan db:seed --class=Database\\Seeders\\DemoSeeder --force
     fi
 fi

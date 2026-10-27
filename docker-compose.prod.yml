@@ -19,7 +19,7 @@ services:
       DB_HOST: mysql
       DB_PORT: 3306
       RUN_MIGRATIONS: "true"
-      RUN_DEMO_SEEDER: "true"
+      RUN_DEMO_SEEDER: "false"
     volumes:
       - mods-storage:/var/www/html/storage/app/mods
       - public-build:/var/www/html/public/build
