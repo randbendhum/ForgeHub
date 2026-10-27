@@ -33,17 +33,17 @@
                     <input type="file"
                            name="file"
                            id="mod-file-input"
-                           accept=".zip,.jar,.xml,.json,.info"
+                           accept=".zip,.jar,.xml,.json,.info,.toml"
                            required
                            style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
 
                     <div class="dropzone__inner">
                         <div class="dropzone__icon">[UP]</div>
                         <div class="dropzone__title">
-                            DRAG &amp; DROP YOUR .ZIP, .JAR, .XML OR .JSON FILE HERE
+                            DRAG &amp; DROP YOUR .ZIP, .JAR, .XML, .JSON OR .TOML FILE HERE
                         </div>
                         <div class="dropzone__subtitle">
-                            OR CLICK THIS BOX TO BROWSE LOCAL FILES // MAX 50 MB
+                            OR CLICK THIS BOX TO BROWSE LOCAL FILES // MAX 100 MB
                         </div>
                         <div class="dropzone__file-pill" data-dropzone-filename hidden></div>
                     </div>
@@ -141,9 +141,9 @@
                         </p>
                     </div>
                     <div>
-                        <strong>[03] MINECRAFT FORGE (mcmod.info)</strong>
+                        <strong>[03] MINECRAFT FORGE &amp; NEOFORGE (mods.toml / mcmod.info)</strong>
                         <p style="margin-top: 0.25rem;">
-                            Supports mod array or <code>modList</code> object with <code>modid</code>, <code>name</code>, <code>version</code>, and <code>mcversion</code>.
+                            Supports modern <code>META-INF/mods.toml</code> &amp; <code>META-INF/neoforge.mods.toml</code> (<code>[[mods]]</code>, <code>modId</code>, <code>displayName</code>, <code>${file.jarVersion}</code> via <code>MANIFEST.MF</code>) as well as legacy <code>mcmod.info</code>.
                         </p>
                     </div>
                     <div>

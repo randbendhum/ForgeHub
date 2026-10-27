@@ -14,6 +14,7 @@ final readonly class ParseContext
         public string $manifestFilename,
         public bool $fromArchive = false,
         public array $archiveEntries = [],
+        public ?string $jarVersion = null,
     ) {}
 
     public function hasArchiveEntry(string $relativePath): bool

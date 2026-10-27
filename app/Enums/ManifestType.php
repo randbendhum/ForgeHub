@@ -13,7 +13,7 @@ enum ManifestType: string
         return match ($this) {
             self::FsModDesc => 'Farming Simulator (modDesc.xml)',
             self::FabricJson => 'Minecraft Fabric (fabric.mod.json)',
-            self::ForgeMcmod => 'Minecraft Forge (mcmod.info)',
+            self::ForgeMcmod => 'Minecraft Forge / NeoForge (mods.toml / mcmod.info)',
         };
     }
 

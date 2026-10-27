@@ -39,22 +39,22 @@ export function initDropzone() {
     };
 
     const runDryRunValidation = async (file) => {
-        const allowed = ['zip', 'jar', 'xml', 'json', 'info'];
+        const allowed = ['zip', 'jar', 'xml', 'json', 'info', 'toml'];
         const ext = (file.name.split('.').pop() || '').toLowerCase();
 
         if (!allowed.includes(ext)) {
             setDropzoneState('is-invalid');
             renderTerminalLines([
                 `<div class="terminal__line terminal__line--error">[FATAL ERROR] EXTENSION ".${escapeHtml(ext.toUpperCase())}" BLOCKED BY VALIDATOR.</div>`,
-                `<div class="terminal__line">ACCEPTED FORMATS: .ZIP, .JAR, .XML (modDesc.xml), .JSON (fabric.mod.json) AND .INFO (mcmod.info).</div>`,
+                `<div class="terminal__line">ACCEPTED FORMATS: .ZIP, .JAR, .XML (modDesc.xml), .JSON (fabric.mod.json), .TOML (mods.toml) AND .INFO (mcmod.info).</div>`,
             ], 'REJECTED');
             return;
         }
 
-        if (file.size > 50 * 1024 * 1024) {
+        if (file.size > 100 * 1024 * 1024) {
             setDropzoneState('is-invalid');
             renderTerminalLines([
-                `<div class="terminal__line terminal__line--error">[FATAL ERROR] FILE EXCEEDS THE 50 MB MAXIMUM LIMIT.</div>`,
+                `<div class="terminal__line terminal__line--error">[FATAL ERROR] FILE EXCEEDS THE 100 MB MAXIMUM LIMIT.</div>`,
             ], 'REJECTED');
             return;
         }

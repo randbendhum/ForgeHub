@@ -7,14 +7,14 @@ return [
     |--------------------------------------------------------------------------
     */
     'disk' => env('MODS_DISK', 'mods'),
-    'max_upload_kb' => (int) env('FORGEMOD_MAX_UPLOAD_KB', 51200), // 50 MB
-    'allowed_extensions' => ['zip', 'jar', 'xml', 'json'],
+    'max_upload_kb' => (int) env('FORGEMOD_MAX_UPLOAD_KB', 102400), // 100 MB
+    'allowed_extensions' => ['zip', 'jar', 'xml', 'json', 'info', 'toml'],
 
     'archive' => [
-        'max_entries' => 10000,
-        'max_uncompressed_bytes' => 536870912, // 512 MB
-        'max_manifest_bytes' => 1048576,       // 1 MB
-        'max_compression_ratio' => 100,
+        'max_entries' => 60000,
+        'max_uncompressed_bytes' => 1073741824, // 1 GB
+        'max_manifest_bytes' => 2097152,        // 2 MB
+        'max_compression_ratio' => 150,
     ],
 
     /*

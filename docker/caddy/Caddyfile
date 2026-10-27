@@ -6,7 +6,7 @@
     encode zstd gzip
 
     request_body {
-        max_size 55MB
+        max_size 105MB
     }
 
     header {

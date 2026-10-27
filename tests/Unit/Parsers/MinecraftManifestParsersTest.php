@@ -8,6 +8,7 @@ use App\Enums\ModStatus;
 use App\Services\ModParsing\Data\ParseContext;
 use App\Services\ModParsing\Parsers\FabricModJsonParser;
 use App\Services\ModParsing\Parsers\ForgeMcmodInfoParser;
+use App\Services\ModParsing\Parsers\ForgeModsTomlParser;
 use PHPUnit\Framework\TestCase;
 
 class MinecraftManifestParsersTest extends TestCase
@@ -52,6 +53,60 @@ class MinecraftManifestParsersTest extends TestCase
         $this->assertSame('industrial_foregoing_pt', $report->manifest()->identifier);
         $this->assertSame('3.4.2', $report->manifest()->version);
         $this->assertContains('1.20.1', $report->manifest()->compatibleGameVersions);
+    }
+
+    public function test_parses_mekanism_forge_and_neoforge_mods_toml(): void
+    {
+        $toml = <<<'TOML'
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/mekanism/Mekanism/issues"
+
+[[mods]]
+modId="mekanism"
+version="${file.jarVersion}"
+displayName="Mekanism"
+displayURL="https://aidancbrady.com/mekanism/"
+authors="Aidancbrady, Thommy101, Thiakil, pupnewfster, dizzyd"
+logoFile="mekanism.png"
+description='''
+Mekanism is a tech mod that brings low, mid, and high tier machinery to Minecraft.
+'''
+
+[[dependencies.mekanism]]
+    modId="neoforge"
+    mandatory=true
+    versionRange="[21.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mekanism]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.21.1]"
+    ordering="NONE"
+    side="BOTH"
+TOML;
+
+        $parser = new ForgeModsTomlParser();
+        $context = new ParseContext(
+            originalFilename: 'Mekanism-1.21.1-10.7.9.72.jar',
+            manifestFilename: 'META-INF/neoforge.mods.toml',
+            fromArchive: true,
+            archiveEntries: ['META-INF/neoforge.mods.toml', 'mekanism.png'],
+            jarVersion: '10.7.9.72',
+        );
+
+        $report = $parser->parse($toml, $context);
+
+        $this->assertSame(ModStatus::Validated, $report->status());
+        $this->assertNotNull($report->manifest());
+        $this->assertSame('mekanism', $report->manifest()->identifier);
+        $this->assertSame('Mekanism', $report->manifest()->name);
+        $this->assertSame('10.7.9.72', $report->manifest()->version);
+        $this->assertSame('Aidancbrady, Thommy101, Thiakil, pupnewfster, dizzyd', $report->manifest()->author);
+        $this->assertContains('1.21.1', $report->manifest()->compatibleGameVersions);
     }
 }
 

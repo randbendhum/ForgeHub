@@ -19,15 +19,14 @@ class ValidateModUploadRequest extends FormRequest
      */
     public function rules(): array
     {
-        $maxKb = (int) config('forgemod.max_upload_kb', 51200);
+        $maxKb = (int) config('forgemod.max_upload_kb', 102400);
 
         return [
             'file' => [
                 'required',
                 'file',
                 'max:' . $maxKb,
-                'extensions:zip,jar,xml,json,info',
-                'mimetypes:application/zip,application/x-zip-compressed,application/java-archive,application/x-java-archive,application/octet-stream,application/xml,text/xml,application/json,text/plain',
+                'extensions:zip,jar,xml,json,info,toml',
                 new SafeArchive(),
             ],
         ];
@@ -39,11 +38,10 @@ class ValidateModUploadRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'file.required' => 'SELECT OR DRAG A MOD FILE (.ZIP, .JAR, .XML OR .JSON).',
+            'file.required' => 'SELECT OR DRAG A MOD FILE (.ZIP, .JAR, .XML, .JSON OR .TOML).',
             'file.file' => 'THE UPLOADED PAYLOAD IS NOT A VALID FILE.',
-            'file.max' => 'THE FILE EXCEEDS THE MAXIMUM ALLOWED SIZE OF 50 MB.',
-            'file.extensions' => 'BLOCKED EXTENSION: ONLY .ZIP, .JAR, .XML, .JSON OR .INFO FILES ARE ACCEPTED.',
-            'file.mimetypes' => 'INVALID MIME TYPE FOR MOD PACKAGE OR MANIFEST.',
+            'file.max' => 'THE FILE EXCEEDS THE MAXIMUM ALLOWED SIZE OF 100 MB.',
+            'file.extensions' => 'BLOCKED EXTENSION: ONLY .ZIP, .JAR, .XML, .JSON, .TOML OR .INFO FILES ARE ACCEPTED.',
         ];
     }
 }

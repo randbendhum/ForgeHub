@@ -12,6 +12,11 @@ final class ArchiveInspector
     private const KNOWN_MANIFESTS = [
         'moddesc.xml' => 'modDesc.xml',
         'fabric.mod.json' => 'fabric.mod.json',
+        'quilt.mod.json' => 'quilt.mod.json',
+        'meta-inf/neoforge.mods.toml' => 'META-INF/neoforge.mods.toml',
+        'meta-inf/mods.toml' => 'META-INF/mods.toml',
+        'neoforge.mods.toml' => 'neoforge.mods.toml',
+        'mods.toml' => 'mods.toml',
         'mcmod.info' => 'mcmod.info',
     ];
 
@@ -32,9 +37,9 @@ final class ArchiveInspector
         }
 
         try {
-            $maxEntries = (int) config('forgemod.archive.max_entries', 10000);
-            $maxUncompressed = (int) config('forgemod.archive.max_uncompressed_bytes', 536870912);
-            $maxRatio = (int) config('forgemod.archive.max_compression_ratio', 100);
+            $maxEntries = (int) config('forgemod.archive.max_entries', 60000);
+            $maxUncompressed = (int) config('forgemod.archive.max_uncompressed_bytes', 1073741824);
+            $maxRatio = (int) config('forgemod.archive.max_compression_ratio', 150);
 
             if ($zip->numFiles === 0) {
                 return 'The ZIP/JAR package is empty.';
@@ -118,6 +123,7 @@ final class ArchiveInspector
             $foundIndex = null;
             $foundCanonicalName = null;
             $foundSize = 0;
+            $jarManifestIndex = null;
 
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $stat = $zip->statIndex($i);
@@ -128,13 +134,23 @@ final class ArchiveInspector
                 $entryName = (string) $stat['name'];
                 $entries[] = $entryName;
 
-                if (! str_contains(rtrim($entryName, '/'), '/')) {
-                    $lower = strtolower($entryName);
-                    if (isset(self::KNOWN_MANIFESTS[$lower]) && $foundIndex === null) {
-                        $foundIndex = $i;
-                        $foundCanonicalName = self::KNOWN_MANIFESTS[$lower];
-                        $foundSize = (int) ($stat['size'] ?? 0);
-                    }
+                $normalized = strtolower(ltrim(str_replace('\\', '/', $entryName), '/'));
+                if ($normalized === 'meta-inf/manifest.mf') {
+                    $jarManifestIndex = $i;
+                }
+
+                if (isset(self::KNOWN_MANIFESTS[$normalized]) && $foundIndex === null) {
+                    $foundIndex = $i;
+                    $foundCanonicalName = self::KNOWN_MANIFESTS[$normalized];
+                    $foundSize = (int) ($stat['size'] ?? 0);
+                }
+            }
+
+            $jarVersion = null;
+            if ($jarManifestIndex !== null) {
+                $mfContent = $zip->getFromIndex($jarManifestIndex);
+                if (is_string($mfContent)) {
+                    $jarVersion = $this->extractJarManifestVersion($mfContent);
                 }
             }
 
@@ -142,20 +158,20 @@ final class ArchiveInspector
                 return [
                     'manifest_filename' => null,
                     'content' => null,
-                    'context' => new ParseContext($originalFilename, '', true, $entries),
+                    'context' => new ParseContext($originalFilename, '', true, $entries, $jarVersion),
                     'error_code' => 'MANIFEST_NOT_FOUND',
-                    'error_message' => 'No supported manifest (modDesc.xml, fabric.mod.json, or mcmod.info) was found at the archive root.',
+                    'error_message' => 'No supported manifest (modDesc.xml, fabric.mod.json, META-INF/mods.toml, META-INF/neoforge.mods.toml, or mcmod.info) was found in the archive.',
                 ];
             }
 
-            $maxManifestBytes = (int) config('forgemod.archive.max_manifest_bytes', 1048576);
+            $maxManifestBytes = (int) config('forgemod.archive.max_manifest_bytes', 2097152);
             if ($foundSize > $maxManifestBytes) {
                 return [
                     'manifest_filename' => $foundCanonicalName,
                     'content' => null,
-                    'context' => new ParseContext($originalFilename, $foundCanonicalName, true, $entries),
+                    'context' => new ParseContext($originalFilename, $foundCanonicalName, true, $entries, $jarVersion),
                     'error_code' => 'MANIFEST_TOO_LARGE',
-                    'error_message' => sprintf('Manifest %s exceeds the 1 MB maximum allowed size.', $foundCanonicalName),
+                    'error_message' => sprintf('Manifest %s exceeds the maximum allowed size.', $foundCanonicalName),
                 ];
             }
 
@@ -164,7 +180,7 @@ final class ArchiveInspector
                 return [
                     'manifest_filename' => $foundCanonicalName,
                     'content' => null,
-                    'context' => new ParseContext($originalFilename, $foundCanonicalName, true, $entries),
+                    'context' => new ParseContext($originalFilename, $foundCanonicalName, true, $entries, $jarVersion),
                     'error_code' => 'MANIFEST_READ_ERROR',
                     'error_message' => sprintf('Unable to extract %s from archive.', $foundCanonicalName),
                 ];
@@ -178,6 +194,7 @@ final class ArchiveInspector
                     manifestFilename: $foundCanonicalName,
                     fromArchive: true,
                     archiveEntries: $entries,
+                    jarVersion: $jarVersion,
                 ),
                 'error_code' => null,
                 'error_message' => null,
@@ -185,5 +202,24 @@ final class ArchiveInspector
         } finally {
             $zip->close();
         }
+    }
+
+    private function extractJarManifestVersion(string $mfContent): ?string
+    {
+        if (preg_match('/^Implementation-Version:\s*(.+)$/mi', $mfContent, $matches) === 1) {
+            $v = trim($matches[1]);
+            if ($v !== '' && ! str_contains($v, '${')) {
+                return $v;
+            }
+        }
+
+        if (preg_match('/^Specification-Version:\s*(.+)$/mi', $mfContent, $matches) === 1) {
+            $v = trim($matches[1]);
+            if ($v !== '' && ! str_contains($v, '${')) {
+                return $v;
+            }
+        }
+
+        return null;
     }
 }

@@ -11,6 +11,7 @@ use App\Services\ModParsing\Data\ValidationReport;
 use App\Services\ModParsing\Parsers\FabricModJsonParser;
 use App\Services\ModParsing\Parsers\FarmingSimulatorModDescParser;
 use App\Services\ModParsing\Parsers\ForgeMcmodInfoParser;
+use App\Services\ModParsing\Parsers\ForgeModsTomlParser;
 use Illuminate\Http\UploadedFile;
 
 final class ModValidator
@@ -24,6 +25,7 @@ final class ModValidator
         $this->parsers = [
             new FarmingSimulatorModDescParser(),
             new FabricModJsonParser(),
+            new ForgeModsTomlParser(),
             new ForgeMcmodInfoParser(),
         ];
     }
@@ -101,9 +103,13 @@ final class ModValidator
             return (new FabricModJsonParser())->parse($rawContent, $context);
         }
 
+        if (str_ends_with(strtolower($manifestFilename), '.toml')) {
+            return (new ForgeModsTomlParser())->parse($rawContent, $context);
+        }
+
         return (new ValidationReport())->error(
             code: 'UNSUPPORTED_MANIFEST',
-            message: sprintf('Unsupported manifest format for "%s". Submit modDesc.xml, fabric.mod.json, or mcmod.info.', $manifestFilename),
+            message: sprintf('Unsupported manifest format for "%s". Submit modDesc.xml, fabric.mod.json, mods.toml, neoforge.mods.toml, or mcmod.info.', $manifestFilename),
         );
     }
 }
