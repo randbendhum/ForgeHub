@@ -16,7 +16,7 @@
             <h1 class="heading-xl" style="margin-top: 0.55rem;">{{ $mod->name }}</h1>
             <div class="mono-label" style="margin-top: 0.35rem; color: var(--c-muted);">
                 TECHNICAL IDENTIFIER: <code>{{ $mod->identifier }}</code> //
-                CREATOR: <a href="{{ route('developers.show', $mod->developer) }}" style="text-decoration: underline;">@{{ $mod->developer->username }}</a>
+                CREATOR: <a href="{{ route('developers.show', $mod->developer) }}" style="text-decoration: underline;">{{ '@' . $mod->developer->username }}</a>
             </div>
         </div>
 

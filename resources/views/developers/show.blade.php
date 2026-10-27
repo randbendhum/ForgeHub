@@ -6,7 +6,7 @@
     <section class="section-header">
         <div>
             <span class="kicker">MOD CREATOR PROFILE</span>
-            <h1 class="heading-xl" style="margin-top: 0.55rem;">{{ $developer->name }} (@{{ $developer->username }})</h1>
+            <h1 class="heading-xl" style="margin-top: 0.55rem;">{{ $developer->name }} ({{ '@' . $developer->username }})</h1>
             @if ($developer->bio)
                 <p style="margin-top: 0.4rem; max-width: 720px;">{{ $developer->bio }}</p>
             @endif

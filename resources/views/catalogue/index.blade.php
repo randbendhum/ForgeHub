@@ -147,7 +147,7 @@
                                 <span>
                                     BY:
                                     <a href="{{ route('developers.show', $mod->developer) }}" style="text-decoration: underline;">
-                                        @{{ $mod->developer->username }}
+                                        {{ '@' . $mod->developer->username }}
                                     </a>
                                 </span>
                                 <a href="{{ route('mods.show', $mod) }}" class="btn btn--sm">

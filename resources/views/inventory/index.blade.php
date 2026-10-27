@@ -5,7 +5,7 @@
 @section('content')
     <section class="section-header">
         <div>
-            <span class="kicker">STORAGE MANAGEMENT // CREATOR: @{{ auth()->user()->username }}</span>
+            <span class="kicker">STORAGE MANAGEMENT // CREATOR: {{ '@' . auth()->user()->username }}</span>
             <h1 class="heading-xl" style="margin-top: 0.55rem;">MOD INVENTORY TABLE</h1>
             <p style="margin-top: 0.4rem;">
                 Complete inventory of submitted versions, automatically extracted XML/JSON metadata, validation status badges, and storage disk paths.

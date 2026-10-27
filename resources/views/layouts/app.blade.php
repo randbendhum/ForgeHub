@@ -36,7 +36,7 @@
             <div class="header-actions">
                 @auth
                     <a href="{{ route('developers.show', auth()->user()) }}" class="nav-link">
-                        @{{ auth()->user()->username }}
+                        {{ '@' . auth()->user()->username }}
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
