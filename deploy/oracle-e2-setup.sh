@@ -47,5 +47,7 @@ iptables -C INPUT -p udp --dport 443 -j ACCEPT 2>/dev/null || iptables -I INPUT 
 netfilter-persistent save || true
 
 echo "==> [4/4] Base VM provisioning complete!"
+mkdir -p public/build
 docker --version
 docker compose version
+

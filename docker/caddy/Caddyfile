@@ -1,8 +1,7 @@
 # ==============================================================================
-# Caddyfile de Produção — ForgeMod Hub (Azure B1ms + Domínio Próprio)
-# Provisiona e renova automaticamente certificados HTTPS Let's Encrypt
+# Production Caddyfile — ForgeMod Hub (Automatic Let's Encrypt HTTPS)
 # ==============================================================================
-{$DOMAIN_NAME:localhost} {
+{$DOMAIN_NAME:forgehub.humbertorandon.com} {
     root * /var/www/html/public
     encode zstd gzip
 
@@ -31,9 +30,3 @@
 
     file_server
 }
-
-# Redireciona www.<dominio> para <dominio> automaticamente
-www.{$DOMAIN_NAME:localhost} {
-    redir https://{$DOMAIN_NAME}{uri} permanent
-}
-
