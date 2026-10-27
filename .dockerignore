@@ -1,0 +1,14 @@
+.git
+node_modules
+vendor
+storage/app/mods/*
+storage/logs/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+.env
+.phpunit.result.cache
+docker/mysql
+deploy
+tests
+

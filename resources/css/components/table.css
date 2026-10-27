@@ -1,0 +1,95 @@
+/* Tabela de Inventário de Mods — Sem linhas suaves, cabeçalhos pretos sólidos */
+.inventory-wrapper {
+    background: var(--c-paper);
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--c-paper);
+}
+
+.inventory-table thead th {
+    background: #000000;
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+    padding: 0.9rem 0.85rem;
+    border: 3px solid #000000;
+    white-space: nowrap;
+}
+
+.inventory-table thead th[data-sort] {
+    cursor: pointer;
+    user-select: none;
+}
+
+.inventory-table thead th[data-sort]:hover {
+    color: var(--c-yellow);
+}
+
+.inventory-table tbody td {
+    border: 3px solid #000000;
+    padding: 0.8rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    vertical-align: middle;
+}
+
+.inventory-table tbody tr:hover {
+    background: #FFF9DB;
+}
+
+.inventory-table tbody tr.is-highlighted {
+    background: var(--c-yellow);
+}
+
+.inventory-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+}
+
+/* Responsividade: abaixo de 720px transforma em cartões CSS Grid */
+@media (max-width: 720px) {
+    .inventory-table,
+    .inventory-table tbody,
+    .inventory-table tr,
+    .inventory-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .inventory-table thead {
+        display: none;
+    }
+
+    .inventory-table tbody tr {
+        border-bottom: 6px solid #000000;
+        padding: 0.5rem;
+    }
+
+    .inventory-table tbody td {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 0.5rem;
+        border: none;
+        border-bottom: 2px solid #000000;
+        padding: 0.55rem 0.4rem;
+    }
+
+    .inventory-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--c-ink);
+    }
+}
+

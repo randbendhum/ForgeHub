@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE modDesc [
+    <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<modDesc descVersion="95">
+    <author>&xxe;</author>
+    <version>1.0.0.0</version>
+    <title><en>XXE Attempt</en></title>
+</modDesc>
+

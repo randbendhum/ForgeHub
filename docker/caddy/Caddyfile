@@ -1,0 +1,39 @@
+# ==============================================================================
+# Caddyfile de Produção — ForgeMod Hub (Azure B1ms + Domínio Próprio)
+# Provisiona e renova automaticamente certificados HTTPS Let's Encrypt
+# ==============================================================================
+{$DOMAIN_NAME:localhost} {
+    root * /var/www/html/public
+    encode zstd gzip
+
+    request_body {
+        max_size 55MB
+    }
+
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        -Server
+    }
+
+    @static {
+        file
+        path *.css *.js *.woff2 *.woff *.ttf *.svg *.png *.jpg *.ico
+    }
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    php_fastcgi app:9000 {
+        trusted_proxies private_ranges
+        read_timeout 120s
+    }
+
+    file_server
+}
+
+# Redireciona www.<dominio> para <dominio> automaticamente
+www.{$DOMAIN_NAME:localhost} {
+    redir https://{$DOMAIN_NAME}{uri} permanent
+}
+

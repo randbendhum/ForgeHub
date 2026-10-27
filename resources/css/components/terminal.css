@@ -1,0 +1,73 @@
+/* Consola Terminal de Diagnóstico XML / JSON */
+.terminal {
+    background: #000000;
+    color: var(--c-green);
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+}
+
+.terminal__bar {
+    background: #1A1A1A;
+    color: var(--c-paper);
+    padding: 0.6rem 1rem;
+    border-bottom: 3px solid #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.terminal__body {
+    padding: 1.15rem;
+    display: grid;
+    gap: 0.85rem;
+    overflow-x: auto;
+}
+
+.terminal__line {
+    line-height: 1.45;
+}
+
+.terminal__line--error {
+    color: #FF5252;
+    font-weight: 700;
+}
+
+.terminal__line--warning {
+    color: var(--c-yellow);
+}
+
+.terminal__line--ok {
+    color: var(--c-green);
+}
+
+.terminal__snippet {
+    background: #111111;
+    color: #E5E5E5;
+    border: 2px solid #333333;
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.pagination-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--c-paper);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+

@@ -1,0 +1,116 @@
+.panel {
+    background: var(--c-paper);
+    border: 3px solid #000000;
+    border-radius: 0px;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 1.35rem;
+}
+
+.panel--alt {
+    background: var(--c-bg-alt);
+}
+
+.panel--yellow {
+    background: var(--c-yellow);
+}
+
+.panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.85rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #000000;
+}
+
+.mod-card {
+    background: var(--c-paper);
+    border: 3px solid #000000;
+    border-radius: 0px;
+    box-shadow: 4px 4px 0px #000000;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transition: transform 80ms linear, box-shadow 80ms linear;
+}
+
+.mod-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+}
+
+.mod-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--c-ink);
+    color: var(--c-paper);
+    border-bottom: 3px solid #000000;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.mod-card__body {
+    padding: 1.15rem;
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+}
+
+.mod-card__title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.mod-card__desc {
+    font-size: 0.92rem;
+    color: var(--c-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mod-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.mod-card__footer {
+    padding: 0.8rem 1.15rem;
+    background: var(--c-bg-alt);
+    border-top: 3px solid #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+}
+
+.flash-banner {
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background: var(--c-green);
+    color: var(--c-ink);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flash-banner--error {
+    background: var(--c-red);
+    color: var(--c-paper);
+}
+

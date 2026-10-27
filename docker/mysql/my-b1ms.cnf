@@ -1,0 +1,30 @@
+[mysqld]
+# ==============================================================================
+# MySQL 8.4 — Ultra Low-Memory Tuning for 1 GB RAM VMs (Oracle E2.1.Micro / B1ms)
+# ==============================================================================
+performance_schema = OFF
+innodb_buffer_pool_size = 128M
+innodb_buffer_pool_instances = 1
+innodb_log_buffer_size = 4M
+innodb_redo_log_capacity = 32M
+innodb_flush_log_at_trx_commit = 2
+innodb_flush_method = O_DIRECT
+
+max_connections = 30
+thread_cache_size = 4
+table_open_cache = 200
+table_definition_cache = 200
+host_cache_size = 0
+
+tmp_table_size = 16M
+max_heap_table_size = 16M
+sort_buffer_size = 256K
+read_buffer_size = 128K
+read_rnd_buffer_size = 128K
+join_buffer_size = 128K
+
+skip-name-resolve
+mysqlx = OFF
+local_infile = 0
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci

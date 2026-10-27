@@ -1,0 +1,127 @@
+/* Zona Central de Drag & Drop — Neo-Brutalista */
+.dropzone {
+    display: grid;
+    place-items: center;
+    min-height: 22rem;
+    padding: 2.25rem 1.75rem;
+    border: 3px dashed #000000;
+    border-radius: 0px;
+    background: var(--c-paper);
+    box-shadow: 4px 4px 0px #000000;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 80ms linear, box-shadow 80ms linear, transform 80ms linear;
+}
+
+.dropzone:hover,
+.dropzone:focus-visible {
+    background: var(--c-bg-alt);
+    outline: none;
+}
+
+.dropzone.is-dragover {
+    background: var(--c-yellow);
+    border-style: solid;
+    box-shadow: 8px 8px 0px #000000;
+    transform: translate(-2px, -2px);
+}
+
+.dropzone.is-valid {
+    background: #E8FFF0;
+    border-style: solid;
+}
+
+.dropzone.is-warning {
+    background: #FFF9DB;
+    border-style: solid;
+}
+
+.dropzone.is-invalid {
+    background: #FFE5E5;
+    border-style: solid;
+}
+
+.dropzone__inner {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: center;
+    max-width: 540px;
+}
+
+.dropzone__icon {
+    width: 4rem;
+    height: 4rem;
+    display: grid;
+    place-items: center;
+    background: var(--c-ink);
+    color: var(--c-yellow);
+    border: var(--border);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: var(--shadow);
+}
+
+.dropzone__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.dropzone__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--c-muted);
+    text-transform: uppercase;
+}
+
+.dropzone__file-pill {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    background: var(--c-ink);
+    color: var(--c-green);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: var(--border);
+    word-break: break-all;
+}
+
+/* Barra de Progresso Brutalista */
+.upload-progress {
+    margin-top: 1rem;
+    border: var(--border);
+    background: var(--c-paper);
+    height: 2rem;
+    position: relative;
+    box-shadow: var(--shadow);
+    display: none;
+}
+
+.upload-progress.is-active {
+    display: block;
+}
+
+.upload-progress__bar {
+    height: 100%;
+    width: 0%;
+    background: var(--c-green);
+    border-right: var(--border);
+    transition: width 80ms linear;
+}
+
+.upload-progress__label {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+

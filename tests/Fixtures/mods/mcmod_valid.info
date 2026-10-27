@@ -1,0 +1,11 @@
+[
+  {
+    "modid": "industrial_foregoing_pt",
+    "name": "Industrial Foregoing Lusitania",
+    "description": "Automação agrícola e industrial para Minecraft Forge.",
+    "version": "3.4.2",
+    "mcversion": "1.20.1",
+    "authorList": ["Buuz135", "Vasco Almeida"]
+  }
+]
+

@@ -1,0 +1,36 @@
+:root {
+    /* Paleta Neo-Brutalista / Hardcore Gaming UI */
+    --c-bg: #F4F4F0;
+    --c-bg-alt: #EBEBE6;
+    --c-ink: #000000;
+    --c-paper: #FFFFFF;
+    --c-muted: #3A3A38;
+
+    /* Realces Ácidos / Brutais */
+    --c-yellow: #FFDE59;
+    --c-orange: #FF5722;
+    --c-green: #00FF66;
+    --c-red: #FF1A1A;
+    --c-cyan: #00E5FF;
+
+    /* Bordas & Cantos Estritos (0px radius) */
+    --bw: 3px;
+    --border: 3px solid #000000;
+    --border-dashed: 3px dashed #000000;
+    --radius: 0px;
+
+    /* Sombras Rígidas (Hard Drop Shadows — 0 blur) */
+    --shadow: 4px 4px 0px #000000;
+    --shadow-press: 2px 2px 0px #000000;
+    --shadow-lg: 6px 6px 0px #000000;
+    --shadow-xl: 8px 8px 0px #000000;
+
+    /* Tipografia */
+    --font-display: "Archivo Black", Impact, "Arial Black", sans-serif;
+    --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", "Courier New", Courier, monospace;
+
+    /* Contentor */
+    --max-width: 1360px;
+}
+

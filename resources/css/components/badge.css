@@ -1,0 +1,64 @@
+/* Badges de Status de Compatibilidade e Tags */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.6rem;
+    border: 3px solid #000000;
+    border-radius: 0px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 2px 2px 0px #000000;
+    white-space: nowrap;
+}
+
+/* Verde Monitor (#00FF66) para Validado */
+.badge--validated {
+    background: var(--c-green);
+    color: var(--c-ink);
+}
+
+/* Amarelo Terminal (#FFDE59) para Validado c/ Avisos */
+.badge--warning {
+    background: var(--c-yellow);
+    color: var(--c-ink);
+}
+
+/* Vermelho Vivo (#FF1A1A) para Erro de Sintaxe XML/JSON */
+.badge--invalid {
+    background: var(--c-red);
+    color: var(--c-paper);
+}
+
+.badge--game {
+    background: var(--c-ink);
+    color: var(--c-yellow);
+}
+
+.badge--compat {
+    background: var(--c-bg-alt);
+    color: var(--c-ink);
+}
+
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.55rem;
+    border: 2px solid #000000;
+    background: var(--c-paper);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tag-chip:hover,
+.tag-chip.is-active {
+    background: var(--c-yellow);
+}
+

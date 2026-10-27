@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="95">
+    <author>AgroTech Portugal</author>
+    <version>1.3.0.0</version>
+    <title>
+        <en>Fendt 1050 Vario Pro</en>
+        <pt>Fendt 1050 Vario Profissional</pt>
+    </title>
+    <description>
+        <en><![CDATA[Heavy tractor with realistic Vario transmission and telemetry.]]></en>
+        <pt><![CDATA[Trator pesado com transmissão Vario realista e telemetria.]]></pt>
+    </description>
+    <iconFilename>icon_fendt.dds</iconFilename>
+    <multiplayer supported="true" />
+    <storeItems>
+        <storeItem xmlFilename="fendt1050.xml" />
+    </storeItems>
+</modDesc>
+
